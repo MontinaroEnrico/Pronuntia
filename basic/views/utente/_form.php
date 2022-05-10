@@ -30,7 +30,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idIndirizzo')->textInput() ?>
 
-    <?= $form->field($model, 'authKey')->textInput() ?>
+    <?= $form->field($model, 'authKey')->hiddenInput((array('value'=>rand())))->label(false)?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

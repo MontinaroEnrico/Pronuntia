@@ -24,8 +24,12 @@ use Yii;
  * @property Logopedista $logopedista
  * @property Paziente $paziente
  */
+
 class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    const WEAK = 0;
+    const STRONG = 1;
+
     /**
      * {@inheritdoc}
      */
@@ -45,6 +49,7 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['numeroTelefono', 'idIndirizzo', 'authKey'], 'integer'],
             [['nome', 'cognome', 'email', 'luogoDiNascita', 'codiceFiscale', 'password'], 'string', 'max' => 45],
             [['idIndirizzo'], 'exist', 'skipOnError' => true, 'targetClass' => Indirizzo::className(), 'targetAttribute' => ['idIndirizzo' => 'idIndirizzo']],
+            [['password'], 'match', 'pattern' => '$\S*(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$', 'message' => 'Password must have atleast 1 uppercase and 1 number '],
         ];
     }
 
