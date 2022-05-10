@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Utente;
 use app\models\UtenteSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -71,6 +72,8 @@ class UtenteController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+                 Yii::$app->db->createCommand("INSERT INTO Logopedista (idLogopedista) VALUES ($model->idUtente)")
+                    ->queryAll();
                 return $this->redirect(['view', 'idUtente' => $model->idUtente]);
             }
         } else {
