@@ -53,7 +53,7 @@ AppAsset::register($this);
                 . '</li>'
             ),
             Yii::$app->user->isGuest ? (
-            ['label' => 'Registrazione', 'url' => ['/utente/create']]
+            ['label' => 'Registrazione Logopedista', 'url' => ['/utente/create']]
             ) : (
                 '<li>'
 

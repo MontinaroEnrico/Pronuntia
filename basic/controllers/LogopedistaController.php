@@ -2,17 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Utente;
-use app\models\UtenteSearch;
-use Yii;
+use app\models\Logopedista;
+use app\models\LogopedistaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UtenteController implements the CRUD actions for Utente model.
+ * LogopedistaController implements the CRUD actions for Logopedista model.
  */
-class UtenteController extends Controller
+class LogopedistaController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,13 +32,13 @@ class UtenteController extends Controller
     }
 
     /**
-     * Lists all Utente models.
+     * Lists all Logopedista models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UtenteSearch();
+        $searchModel = new LogopedistaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,34 +48,30 @@ class UtenteController extends Controller
     }
 
     /**
-     * Displays a single Utente model.
-     * @param int $idUtente Id Utente
+     * Displays a single Logopedista model.
+     * @param int $idLogopedista Id Logopedista
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idUtente)
+    public function actionView($idLogopedista)
     {
         return $this->render('view', [
-            'model' => $this->findModel($idUtente),
+            'model' => $this->findModel($idLogopedista),
         ]);
     }
 
     /**
-     * Creates a new Utente model.
+     * Creates a new Logopedista model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Utente();
+        $model = new Logopedista();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                if(Yii::$app->user->getIsGuest()){
-                    Yii::$app->db->createCommand("INSERT INTO Logopedista (idLogopedista) VALUES ($model->idUtente)")
-                        ->queryAll();
-                }
-                return $this->redirect(['view', 'idUtente' => $model->idUtente]);
+                return $this->redirect(['view', 'idLogopedista' => $model->idLogopedista]);
             }
         } else {
             $model->loadDefaultValues();
@@ -88,18 +83,18 @@ class UtenteController extends Controller
     }
 
     /**
-     * Updates an existing Utente model.
+     * Updates an existing Logopedista model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $idUtente Id Utente
+     * @param int $idLogopedista Id Logopedista
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idUtente)
+    public function actionUpdate($idLogopedista)
     {
-        $model = $this->findModel($idUtente);
+        $model = $this->findModel($idLogopedista);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idUtente' => $model->idUtente]);
+            return $this->redirect(['view', 'idLogopedista' => $model->idLogopedista]);
         }
 
         return $this->render('update', [
@@ -108,29 +103,29 @@ class UtenteController extends Controller
     }
 
     /**
-     * Deletes an existing Utente model.
+     * Deletes an existing Logopedista model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $idUtente Id Utente
+     * @param int $idLogopedista Id Logopedista
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idUtente)
+    public function actionDelete($idLogopedista)
     {
-        $this->findModel($idUtente)->delete();
+        $this->findModel($idLogopedista)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Utente model based on its primary key value.
+     * Finds the Logopedista model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $idUtente Id Utente
-     * @return Utente the loaded model
+     * @param int $idLogopedista Id Logopedista
+     * @return Logopedista the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($idUtente)
+    protected function findModel($idLogopedista)
     {
-        if (($model = Utente::findOne(['idUtente' => $idUtente])) !== null) {
+        if (($model = Logopedista::findOne(['idLogopedista' => $idLogopedista])) !== null) {
             return $model;
         }
 
