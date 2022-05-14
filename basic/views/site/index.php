@@ -2,7 +2,11 @@
 
 /** @var yii\web\View $this */
 
+<<<<<<< Updated upstream
 $this->title = 'My Yii Application';
+=======
+$this->title = 'Pronuntia';
+>>>>>>> Stashed changes
 ?>
 <div class="site-index">
 

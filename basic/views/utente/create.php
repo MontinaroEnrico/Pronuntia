@@ -5,7 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Utente */
 
+<<<<<<< Updated upstream
 $this->title = 'Create Utente';
+=======
+$this->title = 'Registrazione';
+>>>>>>> Stashed changes
 $this->params['breadcrumbs'][] = ['label' => 'Utentes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
