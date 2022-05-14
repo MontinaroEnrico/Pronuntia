@@ -7,11 +7,11 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Utente */
 
 $this->title = $model->idUtente;
-$this->params['breadcrumbs'][] = ['label' => 'Utentes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Paziente', 'url' => ['pazienti']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="utente-view">
+<div class="logopedista-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

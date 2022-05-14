@@ -18,13 +18,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'dataDiNascita')->textInput() ?>
 
     <?= $form->field($model, 'luogoDiNascita')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'codiceFiscale')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'numeroTelefono')->textInput() ?>
 

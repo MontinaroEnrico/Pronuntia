@@ -2,18 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Logopedista;
-use app\models\Utente;
-use app\models\UtenteSearch;
-use Yii;
+use app\models\Esercizio;
+use app\models\EsercizioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UtenteController implements the CRUD actions for Utente model.
+ * EsercizioController implements the CRUD actions for Esercizio model.
  */
-class UtenteController extends Controller
+class EsercizioController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,13 +32,13 @@ class UtenteController extends Controller
     }
 
     /**
-     * Lists all Utente models.
+     * Lists all Esercizio models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UtenteSearch();
+        $searchModel = new EsercizioSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -50,42 +48,30 @@ class UtenteController extends Controller
     }
 
     /**
-     * Displays a single Utente model.
-     * @param int $idUtente Id Utente
+     * Displays a single Esercizio model.
+     * @param int $idEsercizio Id Esercizio
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idUtente)
+    public function actionView($idEsercizio)
     {
         return $this->render('view', [
-            'model' => $this->findModel($idUtente),
+            'model' => $this->findModel($idEsercizio),
         ]);
     }
 
     /**
-     * Creates a new Utente model.
+     * Creates a new Esercizio model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Utente();
-        $idLogopedista=Yii::$app->user->id;
+        $model = new Esercizio();
+
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-<<<<<<< Updated upstream
-                 Yii::$app->db->createCommand("INSERT INTO Logopedista (idLogopedista) VALUES ($model->idUtente)")
-                    ->queryAll();
-=======
-                if(Yii::$app->user->getIsGuest()){
-                    Yii::$app->db->createCommand("INSERT INTO Logopedista (idLogopedista) VALUES ($model->idUtente)")
-                        ->queryAll();
-                }elseif ( (new Logopedista())->logopedistaLogged()){
-                    Yii::$app->db->createCommand("INSERT INTO Paziente (idPaziente,idLogopedista) VALUES ($model->idUtente,$idLogopedista)")
-                        ->queryAll();
-                }
->>>>>>> Stashed changes
-                return $this->redirect(['view', 'idUtente' => $model->idUtente]);
+                return $this->redirect(['view', 'idEsercizio' => $model->idEsercizio]);
             }
         } else {
             $model->loadDefaultValues();
@@ -97,18 +83,18 @@ class UtenteController extends Controller
     }
 
     /**
-     * Updates an existing Utente model.
+     * Updates an existing Esercizio model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $idUtente Id Utente
+     * @param int $idEsercizio Id Esercizio
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idUtente)
+    public function actionUpdate($idEsercizio)
     {
-        $model = $this->findModel($idUtente);
+        $model = $this->findModel($idEsercizio);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idUtente' => $model->idUtente]);
+            return $this->redirect(['view', 'idEsercizio' => $model->idEsercizio]);
         }
 
         return $this->render('update', [
@@ -117,34 +103,32 @@ class UtenteController extends Controller
     }
 
     /**
-     * Deletes an existing Utente model.
+     * Deletes an existing Esercizio model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $idUtente Id Utente
+     * @param int $idEsercizio Id Esercizio
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idUtente)
+    public function actionDelete($idEsercizio)
     {
-        $this->findModel($idUtente)->delete();
+        $this->findModel($idEsercizio)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Utente model based on its primary key value.
+     * Finds the Esercizio model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $idUtente Id Utente
-     * @return Utente the loaded model
+     * @param int $idEsercizio Id Esercizio
+     * @return Esercizio the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($idUtente)
+    protected function findModel($idEsercizio)
     {
-        if (($model = Utente::findOne(['idUtente' => $idUtente])) !== null) {
+        if (($model = Esercizio::findOne(['idEsercizio' => $idEsercizio])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-
 }

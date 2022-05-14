@@ -4,12 +4,12 @@
 /** @var string $content */
 
 use app\assets\AppAsset;
+use app\models\Logopedista;
 use app\widgets\Alert;
 use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
-
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -39,7 +39,8 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Contact', 'url' => ['/utente/index']],
+
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -58,9 +59,24 @@ AppAsset::register($this);
                 '<li>'
 
                 . '</li>'
+            ),
+            (new app\models\Logopedista)->logopedistaLogged() ? (
+            ['label' => 'Gestisci Pazienti', 'url' => ['#'], 'items' => [
+
+            ['label' => 'Registrazione Paziente', 'url' => ['/utente/create']],
+             ['label' => 'Crea Terapia', 'url' => ['/esercizio/create']],
+            ['label' => 'Visualizza Pazienti', 'url' => ['/logopedista/index']]]]
+
+
+            ):(
+                '<li>'
+
+                . '</li>'
             )
 
         ],
+
+
     ]);
     NavBar::end();
     ?>

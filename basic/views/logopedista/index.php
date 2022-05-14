@@ -10,18 +10,16 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UtenteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Utentes';
+$this->title = 'Pazienti';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="utente-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Utente', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php $url="/utente/view"// echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -42,9 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'authKey',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Utente $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'idUtente' => $model->idUtente]);
-                 }
+                'urlCreator' => function ($url, Utente $model, $key, $index, $column) {
+                    return Url::toRoute(['/utente/view', 'idUtente' => $model->idUtente]);
+                }
             ],
         ],
     ]); ?>

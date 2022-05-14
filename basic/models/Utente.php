@@ -68,7 +68,6 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'codiceFiscale' => 'Codice Fiscale',
             'password' => 'Password',
             'numeroTelefono' => 'Numero Telefono',
-            'idIndirizzo' => 'Id Indirizzo',
             'authKey' => 'Auth Key',
         ];
     }
@@ -140,4 +139,5 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function validatePassword($password){
         return $this->password === $password;
     }
+
 }

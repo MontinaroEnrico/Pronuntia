@@ -1,24 +1,23 @@
 <?php
 
-use app\models\Utente;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\UtenteSearch */
+/* @var $searchModel app\models\EsercizioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Utentes';
+$this->title = 'Esercizios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="utente-index">
+<div class="esercizio-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Utente', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Esercizio', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,21 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idUtente',
-            'nome',
-            'cognome',
-            'email:email',
-            'dataDiNascita',
-            //'luogoDiNascita',
-            //'codiceFiscale',
-            //'password',
-            //'numeroTelefono',
-            //'idIndirizzo',
-            //'authKey',
+            'idEsercizio',
+            'tipologia',
+            'Logopedista_idLogopedista',
+            'Domanda',
+            'Risposta',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Utente $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'idUtente' => $model->idUtente]);
+                'urlCreator' => function ($action, Esercizio $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'idEsercizio' => $model->idEsercizio]);
                  }
             ],
         ],
