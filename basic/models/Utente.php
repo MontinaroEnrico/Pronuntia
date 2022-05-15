@@ -44,12 +44,13 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['nome', 'cognome', 'email', 'dataDiNascita', 'luogoDiNascita', 'codiceFiscale', 'password', 'numeroTelefono', 'idIndirizzo', 'authKey'], 'required'],
+            [['nome', 'cognome', 'email', 'dataDiNascita', 'luogoDiNascita', 'codiceFiscale', 'password', 'numeroTelefono', 'authKey'], 'required'],
             [['dataDiNascita'], 'safe'],
             [['numeroTelefono', 'idIndirizzo', 'authKey'], 'integer'],
             [['nome', 'cognome', 'email', 'luogoDiNascita', 'codiceFiscale', 'password'], 'string', 'max' => 45],
             [['idIndirizzo'], 'exist', 'skipOnError' => true, 'targetClass' => Indirizzo::className(), 'targetAttribute' => ['idIndirizzo' => 'idIndirizzo']],
             [['password'], 'match', 'pattern' => '$\S*(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$', 'message' => 'Password must have atleast 1 uppercase and 1 number '],
+            [['email'], 'match', 'pattern' =>  '/^[a-zA-Z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/', 'message' => 'Email non valida'],
         ];
     }
 

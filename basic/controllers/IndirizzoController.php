@@ -2,18 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Logopedista;
-use app\models\Utente;
-use app\models\UtenteSearch;
-use Yii;
+use app\models\Indirizzo;
+use app\models\IndirizzoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UtenteController implements the CRUD actions for Utente model.
+ * IndirizzoController implements the CRUD actions for Indirizzo model.
  */
-class UtenteController extends Controller
+class IndirizzoController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,13 +32,13 @@ class UtenteController extends Controller
     }
 
     /**
-     * Lists all Utente models.
+     * Lists all Indirizzo models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UtenteSearch();
+        $searchModel = new IndirizzoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -50,37 +48,30 @@ class UtenteController extends Controller
     }
 
     /**
-     * Displays a single Utente model.
-     * @param int $idUtente Id Utente
+     * Displays a single Indirizzo model.
+     * @param int $idIndirizzo Id Indirizzo
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idUtente)
+    public function actionView($idIndirizzo)
     {
         return $this->render('view', [
-            'model' => $this->findModel($idUtente),
+            'model' => $this->findModel($idIndirizzo),
         ]);
     }
 
     /**
-     * Creates a new Utente model.
+     * Creates a new Indirizzo model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Utente();
-        $idLogopedista=Yii::$app->user->id;
+        $model = new Indirizzo();
+
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                if(Yii::$app->user->getIsGuest()){
-                    Yii::$app->db->createCommand("INSERT INTO Logopedista (idLogopedista) VALUES ($model->idUtente)")
-                        ->queryAll();
-                }elseif ( (new Logopedista())->logopedistaLogged()){
-                    Yii::$app->db->createCommand("INSERT INTO Paziente (idPaziente,idLogopedista) VALUES ($model->idUtente,$idLogopedista)")
-                        ->queryAll();
-                }
-                return $this->redirect(['view', 'idUtente' => $model->idUtente]);
+                return $this->redirect(['view', 'idIndirizzo' => $model->idIndirizzo]);
             }
         } else {
             $model->loadDefaultValues();
@@ -92,18 +83,18 @@ class UtenteController extends Controller
     }
 
     /**
-     * Updates an existing Utente model.
+     * Updates an existing Indirizzo model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $idUtente Id Utente
+     * @param int $idIndirizzo Id Indirizzo
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idUtente)
+    public function actionUpdate($idIndirizzo)
     {
-        $model = $this->findModel($idUtente);
+        $model = $this->findModel($idIndirizzo);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idUtente' => $model->idUtente]);
+            return $this->redirect(['view', 'idIndirizzo' => $model->idIndirizzo]);
         }
 
         return $this->render('update', [
@@ -112,34 +103,32 @@ class UtenteController extends Controller
     }
 
     /**
-     * Deletes an existing Utente model.
+     * Deletes an existing Indirizzo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $idUtente Id Utente
+     * @param int $idIndirizzo Id Indirizzo
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idUtente)
+    public function actionDelete($idIndirizzo)
     {
-        $this->findModel($idUtente)->delete();
+        $this->findModel($idIndirizzo)->delete();
 
-        return $this->redirect(['logopedista/index']);
+        return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Utente model based on its primary key value.
+     * Finds the Indirizzo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $idUtente Id Utente
-     * @return Utente the loaded model
+     * @param int $idIndirizzo Id Indirizzo
+     * @return Indirizzo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($idUtente)
+    protected function findModel($idIndirizzo)
     {
-        if (($model = Utente::findOne(['idUtente' => $idUtente])) !== null) {
+        if (($model = Indirizzo::findOne(['idIndirizzo' => $idIndirizzo])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-
 }

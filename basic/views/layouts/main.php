@@ -28,8 +28,9 @@ AppAsset::register($this);
 <header>
     <?php
     NavBar::begin([
+            /*
         'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => Yii::$app->homeUrl,*/
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
@@ -39,7 +40,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/utente/index']],
+            ['label' => 'Contact', 'url' => ['/site/contact']],
 
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
@@ -54,17 +55,16 @@ AppAsset::register($this);
                 . '</li>'
             ),
             Yii::$app->user->isGuest ? (
-            ['label' => 'Registrazione', 'url' => ['/utente/create']]
+            ['label' => 'Registrazione Logopedista', 'url' => ['/utente/create']]
             ) : (
                 '<li>'
 
                 . '</li>'
             ),
             (new app\models\Logopedista)->logopedistaLogged() ? (
-            ['label' => 'Gestisci Pazienti', 'url' => ['#'], 'items' => [
+            ['label' => 'Gestione Pazienti', 'url' => ['#'], 'items' => [
 
             ['label' => 'Registrazione Paziente', 'url' => ['/utente/create']],
-             ['label' => 'Crea Terapia', 'url' => ['/esercizio/create']],
             ['label' => 'Visualizza Pazienti', 'url' => ['/logopedista/index']]]]
 
 
@@ -72,8 +72,26 @@ AppAsset::register($this);
                 '<li>'
 
                 . '</li>'
-            )
+            ),
+            (new app\models\Logopedista)->logopedistaLogged() ? (
+            ['label' => 'Gestione Terapia', 'url' => ['#'], 'items' => [
+            ['label' => 'Crea Terapia', 'url' => ['/terapia/create']],
+                ['label' => 'Visualizza Terapie', 'url' => ['/terapia/index']],
+                ['label' => 'Assegna esercizi a terapia', 'url' => ['/terapia-has-esercizio/create']]]]
+            ):(
+                '<li>'
 
+                . '</li>'
+            ),
+            (new app\models\Logopedista)->logopedistaLogged() ? (
+            ['label' => 'Gestione Esercizi', 'url' => ['#'], 'items' => [
+                ['label' => 'Crea esercizio', 'url' => ['/esercizio/create']],
+                ['label' => 'Visualizza Esercizi Disponibili', 'url' => ['/esercizio/index']]]]
+            ):(
+                '<li>'
+
+                . '</li>'
+            ),
         ],
 
 

@@ -129,12 +129,48 @@ class Paziente extends \yii\db\ActiveRecord
     {
         return $this->hasMany(PazienteSvolgeEsercizio::className(), ['Paziente_idPaziente' => 'idPaziente']);
     }
+
+
+    public function pazienteLogged()
+    {
+        $query = new Query;
+        $idPazienti = $query->select('idPaziente')
+            ->from('Paziente')
+            ->all();
+
+        foreach ($idPazienti as $id) {
+            if ($id['idPaziente'] == Yii::$app->user->id) {
+                return true;
+            }
+        }
+    }
+
     public function getPazientiLogopedistalogged(){
         $query = new Query;
-        $modelPaziente = $query->select('*')
+
+        $pazienti = $query->select('*')
             ->from('Paziente')
+            ->join('Join','Utente','Paziente.idPaziente=Utente.idUtente')
             ->where(['idLogopedista' => Yii::$app->user->id])
             ->all();
-        return $modelPaziente;
+        /*
+        $logopedista=Yii::$app->user->id;
+       $pazienti= $query->select('email,idTerapia')->from('Paziente')
+           ->join("join","Terapia","Paziente.idPaziente=Terapia.idPaziente")
+           ->join(" join","Utente","Utente.idUtente=Paziente.idPaziente")
+           ->where("Paziente.idLogopedista='$logopedista'")->groupBy('email,idTerapia')->all();
+*/
+        return $pazienti;
     }
+    public function getPazientiAssegnaEsercizi(){
+        $query = new Query;
+        $logopedista=Yii::$app->user->id;
+       $pazienti= $query->select('email,idTerapia')->from('Paziente')
+           ->join("join","Terapia","Paziente.idPaziente=Terapia.idPaziente")
+           ->join(" join","Utente","Utente.idUtente=Paziente.idPaziente")
+           ->where("Paziente.idLogopedista='$logopedista'")->all();
+
+        return $pazienti;
+    }
+
 }

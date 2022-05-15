@@ -112,16 +112,6 @@ class Logopedista extends \yii\db\ActiveRecord
             }
         }
     }
-/*
-    public function trovaPazienti()
-    {
-        $query = new Query;
-        $idPaziente = $query->select('idPaziente')
-            ->from('Paziente')
-            ->where('idLogopedista' == Yii::$app->user->id)
-            ->all();
-        return $idPaziente;
-    }
-*/
+
 
 }
