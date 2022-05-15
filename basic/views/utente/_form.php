@@ -28,7 +28,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'numeroTelefono')->textInput() ?>
 
-    <?= $form->field($model, 'idIndirizzo')->textInput() ?>
 
     <?= $form->field($model, 'authKey')->hiddenInput((array('value'=>rand())))->label(false)?>
 

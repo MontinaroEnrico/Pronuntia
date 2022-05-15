@@ -2,18 +2,21 @@
 
 namespace app\controllers;
 
-use app\models\Logopedista;
+use app\models\Paziente;
+use app\models\Terapia;
+use app\models\TerapiaSearch;
 use app\models\Utente;
 use app\models\UtenteSearch;
-use Yii;
+use yii\debug\models\timeline\DataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UtenteController implements the CRUD actions for Utente model.
+ * TerapiaController implements the CRUD actions for Terapia model.
  */
-class UtenteController extends Controller
+class TerapiaController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,13 +37,13 @@ class UtenteController extends Controller
     }
 
     /**
-     * Lists all Utente models.
+     * Lists all Terapia models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UtenteSearch();
+        $searchModel = new TerapiaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -50,37 +53,33 @@ class UtenteController extends Controller
     }
 
     /**
-     * Displays a single Utente model.
-     * @param int $idUtente Id Utente
+     * Displays a single Terapia model.
+     * @param int $idTerapia Id Terapia
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idUtente)
+    public function actionView($idTerapia)
     {
         return $this->render('view', [
-            'model' => $this->findModel($idUtente),
+            'model' => $this->findModel($idTerapia),
         ]);
     }
 
     /**
-     * Creates a new Utente model.
+     * Creates a new Terapia model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Utente();
-        $idLogopedista=Yii::$app->user->id;
+        $model = new Terapia();
+        $paziente=new Paziente();
+        $pazienti=$paziente->getPazientiLogopedistalogged();
+        $modelUtente=new Utente();
+
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                if(Yii::$app->user->getIsGuest()){
-                    Yii::$app->db->createCommand("INSERT INTO Logopedista (idLogopedista) VALUES ($model->idUtente)")
-                        ->queryAll();
-                }elseif ( (new Logopedista())->logopedistaLogged()){
-                    Yii::$app->db->createCommand("INSERT INTO Paziente (idPaziente,idLogopedista) VALUES ($model->idUtente,$idLogopedista)")
-                        ->queryAll();
-                }
-                return $this->redirect(['view', 'idUtente' => $model->idUtente]);
+                return $this->redirect(['/terapia-has-esercizio/create', 'Terapia_idTerapia' => $model->idTerapia]);
             }
         } else {
             $model->loadDefaultValues();
@@ -88,22 +87,24 @@ class UtenteController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'modelUtente'=>$modelUtente,
+            'pazienti' =>$pazienti
         ]);
     }
 
     /**
-     * Updates an existing Utente model.
+     * Updates an existing Terapia model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $idUtente Id Utente
+     * @param int $idTerapia Id Terapia
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idUtente)
+    public function actionUpdate($idTerapia)
     {
-        $model = $this->findModel($idUtente);
+        $model = $this->findModel($idTerapia);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idUtente' => $model->idUtente]);
+            return $this->redirect(['view', 'idTerapia' => $model->idTerapia]);
         }
 
         return $this->render('update', [
@@ -112,34 +113,32 @@ class UtenteController extends Controller
     }
 
     /**
-     * Deletes an existing Utente model.
+     * Deletes an existing Terapia model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $idUtente Id Utente
+     * @param int $idTerapia Id Terapia
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idUtente)
+    public function actionDelete($idTerapia)
     {
-        $this->findModel($idUtente)->delete();
+        $this->findModel($idTerapia)->delete();
 
-        return $this->redirect(['logopedista/index']);
+        return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Utente model based on its primary key value.
+     * Finds the Terapia model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $idUtente Id Utente
-     * @return Utente the loaded model
+     * @param int $idTerapia Id Terapia
+     * @return Terapia the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($idUtente)
+    protected function findModel($idTerapia)
     {
-        if (($model = Utente::findOne(['idUtente' => $idUtente])) !== null) {
+        if (($model = Terapia::findOne(['idTerapia' => $idTerapia])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-
 }

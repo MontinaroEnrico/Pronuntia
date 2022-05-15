@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "Esercizio".
@@ -10,12 +11,15 @@ use Yii;
  * @property int $idEsercizio
  * @property string|null $tipologia
  * @property int $Logopedista_idLogopedista
+ * @property string|null $nomeEsercizio
  * @property string|null $Domanda
  * @property string|null $Risposta
  *
  * @property Logopedista $logopedistaIdLogopedista
  * @property Paziente[] $pazienteIdPazientes
  * @property PazienteSvolgeEsercizio[] $pazienteSvolgeEsercizios
+ * @property TerapiaHasEsercizio[] $terapiaHasEsercizios
+ * @property Terapia[] $terapiaIdTerapias
  */
 class Esercizio extends \yii\db\ActiveRecord
 {
@@ -34,8 +38,9 @@ class Esercizio extends \yii\db\ActiveRecord
     {
         return [
             [['Logopedista_idLogopedista'], 'required'],
+            [['nomeEsercizio'], 'required'],
             [['Logopedista_idLogopedista'], 'integer'],
-            [['tipologia', 'Risposta'], 'string', 'max' => 45],
+            [['tipologia', 'Risposta','nomeEsercizio'], 'string', 'max' => 45],
             [['Domanda'], 'string', 'max' => 300],
             [['Logopedista_idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['Logopedista_idLogopedista' => 'idLogopedista']],
         ];
@@ -52,6 +57,7 @@ class Esercizio extends \yii\db\ActiveRecord
             'Logopedista_idLogopedista' => 'Logopedista Id Logopedista',
             'Domanda' => 'Domanda',
             'Risposta' => 'Risposta',
+            'nomeEsercizio'=>'Nome Esercizio',
         ];
     }
 
@@ -83,5 +89,34 @@ class Esercizio extends \yii\db\ActiveRecord
     public function getPazienteSvolgeEsercizios()
     {
         return $this->hasMany(PazienteSvolgeEsercizio::className(), ['Esercizio_idEsercizio' => 'idEsercizio']);
+    }
+
+    /**
+     * Gets query for [[TerapiaHasEsercizios]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTerapiaHasEsercizios()
+    {
+        return $this->hasMany(TerapiaHasEsercizio::className(), ['Esercizio_idEsercizio' => 'idEsercizio']);
+    }
+
+    /**
+     * Gets query for [[TerapiaIdTerapias]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTerapiaIdTerapias()
+    {
+        return $this->hasMany(Terapia::className(), ['idTerapia' => 'Terapia_idTerapia'])->viaTable('Terapia_has_Esercizio', ['Esercizio_idEsercizio' => 'idEsercizio']);
+    }
+    public function getEserciziDisponibili(){
+        $query = new Query;
+
+        $logopedista=Yii::$app->user->id;
+        $esercizi= $query->select('*')->from('Esercizio')
+            ->where("Esercizio.Logopedista_idLogopedista='$logopedista'")
+            ->orWhere(['Esercizio.Logopedista_idLogopedista' => null])->all();
+        return $esercizi;
     }
 }
