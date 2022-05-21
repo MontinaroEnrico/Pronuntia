@@ -27,13 +27,12 @@ use yii\widgets\ActiveForm;
 
 
     ?>
-    <?= $form->field($model, 'dataInizio')->widget(DatePicker::classname(), ['dateFormat' => 'php:Y-m-d', 'options' => ['readonly' => true], 'clientOptions' => [ 'changeMonth' => true, 'changeYear' => true, 'yearRange' => '2022:'.date('Y'), 'minDate' => '+0d']]) ?>
-    <?= $form->field($model, 'dataFine')->widget(DatePicker::classname(), ['dateFormat' => 'php:Y-m-d', 'options' => ['readonly' => true], 'clientOptions' => [ 'changeMonth' => true, 'changeYear' => true, 'yearRange' => '1980:'.date('Y'), 'minDate' => '+0d']]) ?>
+    <?= $form->field($model, 'dataInizio')->widget(DatePicker::classname(), ['dateFormat' => 'php:Y-m-d', 'options' => ['readonly' => true], 'clientOptions' => [ 'changeMonth' => true, 'changeYear' => true, 'yearRange' => '1980:'.date('Y'), 'maxDate' => '+0d']]) ?>
+    <?= $form->field($model, 'dataFine')->widget(DatePicker::classname(), ['dateFormat' => 'php:Y-m-d', 'options' => ['readonly' => true], 'clientOptions' => [ 'changeMonth' => true, 'changeYear' => true, 'yearRange' => '1980:'.date('Y'), 'maxDate' => '+0d']]) ?>
 
 
 
     <?= $form->field($model, 'idTerapia')->hiddenInput(array(""))->label(false) ?>
-
 
     <div class="form-group">
         <?= Html::submitButton('CREA', ['class' => 'btn btn-success']) ?>

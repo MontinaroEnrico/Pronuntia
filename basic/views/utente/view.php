@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Utente */
 
-$this->title = $model->idUtente;
-$this->params['breadcrumbs'][] = ['label' => 'Utentes', 'url' => ['index']];
+$this->title = 'Visualizza Profilo';
+
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

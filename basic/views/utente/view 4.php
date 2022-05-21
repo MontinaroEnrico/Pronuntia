@@ -3,16 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-?>
-<?php
-
-
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Utente */
 
-$this->title = 'Visualizza Profilo';
-
+$this->title = $model->idUtente;
+$this->params['breadcrumbs'][] = ['label' => 'Utentes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

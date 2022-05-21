@@ -11,10 +11,9 @@ use yii\widgets\ActiveForm;
 <div class="utente-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['pazienti'],
+        'action' => ['index'],
         'method' => 'get',
     ]); ?>
-
 
     <?= $form->field($model, 'idUtente') ?>
 

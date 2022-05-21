@@ -1,24 +1,24 @@
 <?php
 
-use app\models\Terapia;
+use app\models\Utente;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\TerapiaSearch */
+/* @var $searchModel app\models\UtenteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Terapias';
+$this->title = 'Utentes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="terapia-index">
+<div class="utente-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Terapia', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Utente', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,16 +29,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idTerapia',
-           // 'idPaziente',
-            'dataInizio',
-            'dataFine',
-           // 'idLogopedista',
-            'email',
+            'idUtente',
+            'nome',
+            'cognome',
+            'email:email',
+            'dataDiNascita',
+            //'luogoDiNascita',
+            //'codiceFiscale',
+            //'password',
+            //'numeroTelefono',
+            //'idIndirizzo',
+            //'authKey',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Terapia $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'idTerapia' => $model->idTerapia]);
+                'urlCreator' => function ($action, Utente $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'idUtente' => $model->idUtente]);
                  }
             ],
         ],

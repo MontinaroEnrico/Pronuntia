@@ -6,7 +6,10 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Utente */
 /* @var $form yii\widgets\ActiveForm */
+$Logopedista=new \app\models\Logopedista();
+$idLogopedista=$Logopedista->logopedistaLogged();
 ?>
+
 
 <div class="utente-form">
 
@@ -30,7 +33,10 @@ use yii\widgets\ActiveForm;
 
 
     <?= $form->field($model, 'authKey')->hiddenInput((array('value'=>rand())))->label(false)?>
+<?php if($idLogopedista>0){ ?>
+    <?= $form->field($model, 'diagnosi')->textInput() ?>
 
+<?php }?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

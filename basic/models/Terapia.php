@@ -15,6 +15,7 @@ use yii\db\Query;
  * @property string $dataFine
  * @property Esercizio[] $esercizioIdEsercizios
  * @property TerapiaHasEsercizio[] $terapiaHasEsercizios
+ * @property string $email
  */
 class Terapia extends \yii\db\ActiveRecord
 {
@@ -36,8 +37,10 @@ class Terapia extends \yii\db\ActiveRecord
             [['idTerapia'], 'unique'],
             [['idPaziente'], 'integer'],
             [['idLogopedista'], 'integer'],
+            [['email'], 'string'],
             [['dataInizio'], 'safe'],
             [['dataFine'], 'safe'],
+
 
         ];
     }
@@ -53,6 +56,7 @@ class Terapia extends \yii\db\ActiveRecord
             'idLogopedista'=>'Logopedista',
             'dataInizio' => 'Data Inizio',
             'dataFine' => 'Data Fine',
+            'email' => 'Email'
         ];
     }
 
@@ -75,13 +79,5 @@ class Terapia extends \yii\db\ActiveRecord
     {
         return $this->hasMany(TerapiaHasEsercizio::className(), ['Terapia_idTerapia' => 'idTerapia']);
     }
-    public function getIdTerapiaUtente($idUtente){
-        $query = new Query;
-        $idTerapia=0;
-        $idTerapie= $query->select('idTerapia')->from('Terapia')->join('JOIN','Utente',"'$idUtente'=Terapia.idPaziente")->all();
-        foreach ($idTerapie as $id) {
-            $idTerapia = $id['idTerapia'];
-        }
-        return $idTerapia;
-    }
+
 }

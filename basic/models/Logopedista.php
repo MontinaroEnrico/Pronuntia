@@ -108,7 +108,7 @@ class Logopedista extends \yii\db\ActiveRecord
 
         foreach ($idLogopedisti as $id) {
             if ($id['idLogopedista'] == Yii::$app->user->id) {
-                return true;
+                return $id['idLogopedista'];
             }
         }
     }

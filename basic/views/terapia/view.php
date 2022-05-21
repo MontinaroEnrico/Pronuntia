@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap4\Progress;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -10,6 +11,9 @@ $this->title = $model->idTerapia;
 $this->params['breadcrumbs'][] = ['label' => 'Terapias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+$modelUtente=new \app\models\UtenteSearch();
+$datiPaziente=$modelUtente::findIdentity($model->idPaziente);
+$model->email=$datiPaziente->email;
 ?>
 <div class="terapia-view">
 
@@ -25,12 +29,25 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <?=
+    $tot = Yii::$app->db->createCommand('SELECT count(*) as tot FROM Terapia_has_Esercizio where Terapia_idTerapia= "'.$model->idTerapia.'"')->queryScalar();
+    $completati = Yii::$app->db->createCommand('SELECT count(*) as tot FROM Terapia_has_Esercizio where Terapia_idTerapia= "'.$model->idTerapia.'" AND stato="Completato"')->queryScalar();
+
+    ?>
+
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'idTerapia',
+            'email',
+            'dataInizio',
+            'dataFine'
         ],
     ]) ?>
+    <?php echo Progress::widget([
+        'percent' => ($completati/$tot)*100,
+        'barOptions' => ['class' => ['bg-success', 'progress-bar-animated', 'progress-bar-striped']]
+    ]);?>
 
 </div>

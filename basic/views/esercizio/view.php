@@ -1,7 +1,9 @@
 <?php
 
+use kartik\rating\StarRating;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\bootstrap;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Esercizio */
@@ -34,7 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'Logopedista_idLogopedista',
             'Domanda',
             'Risposta',
+            'rating'
         ],
     ]) ?>
+
+
 
 </div>

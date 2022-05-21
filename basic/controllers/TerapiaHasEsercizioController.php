@@ -80,7 +80,7 @@ class TerapiaHasEsercizioController extends Controller
         if ($this->request->isPost) {
 
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'Terapia_idTerapia' => $model->Terapia_idTerapia, 'Esercizio_idEsercizio' => $model->Esercizio_idEsercizio]);
+                return $this->redirect(['/terapia-has-esercizio/create', 'Terapia_idTerapia' => $model->Terapia_idTerapia, 'Esercizio_idEsercizio' => $model->Esercizio_idEsercizio]);
             }
         } else {
             $model->loadDefaultValues();

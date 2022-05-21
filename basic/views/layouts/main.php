@@ -11,6 +11,10 @@ use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 AppAsset::register($this);
+$modelLogopedista=new Logopedista();
+$idLogopedista= $modelLogopedista->logopedistaLogged();
+$modelPaziente=new \app\models\Paziente();
+$idPaziente=$modelPaziente->pazienteLogged();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -35,12 +39,14 @@ AppAsset::register($this);
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
     ]);
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            
+
 
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
@@ -61,7 +67,17 @@ AppAsset::register($this);
 
                 . '</li>'
             ),
-            (new app\models\Logopedista)->logopedistaLogged() ? (
+           $idLogopedista>0 ? (
+
+                ['label' => 'Visualizza Profilo', 'url' => ['/utente/view','idUtente'=>$idLogopedista]]
+
+
+            ):(
+                '<li>'
+
+                . '</li>'
+           ),
+           $idLogopedista>0 ? (
             ['label' => 'Gestione Pazienti', 'url' => ['#'], 'items' => [
 
             ['label' => 'Registrazione Paziente', 'url' => ['/utente/create']],
@@ -73,7 +89,7 @@ AppAsset::register($this);
 
                 . '</li>'
             ),
-            (new app\models\Logopedista)->logopedistaLogged() ? (
+            $idLogopedista>0 ? (
             ['label' => 'Gestione Terapia', 'url' => ['#'], 'items' => [
             ['label' => 'Crea Terapia', 'url' => ['/terapia/create']],
                 ['label' => 'Visualizza Terapie', 'url' => ['/terapia/index']],
@@ -83,8 +99,9 @@ AppAsset::register($this);
 
                 . '</li>'
             ),
-            (new app\models\Logopedista)->logopedistaLogged() ? (
-            ['label' => 'Gestione Esercizi', 'url' => ['#'], 'items' => [
+/*
+            $idLogopedista>0 ? (
+                ['label' => 'Gestione Esercizi', 'url' => ['#'], 'items' => [
                 ['label' => 'Crea esercizio', 'url' => ['/esercizio/create']],
                 ['label' => 'Visualizza Esercizi Disponibili', 'url' => ['/esercizio/index']]]]
             ):(
@@ -92,9 +109,8 @@ AppAsset::register($this);
 
                 . '</li>'
             ),
+*/
         ],
-
-
     ]);
     NavBar::end();
     ?>

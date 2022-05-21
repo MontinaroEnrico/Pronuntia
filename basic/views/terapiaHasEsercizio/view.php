@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap4\Progress;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -33,5 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'Esercizio_idEsercizio',
         ],
     ]) ?>
+
 
 </div>
