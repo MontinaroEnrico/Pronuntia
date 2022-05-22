@@ -14,7 +14,8 @@ use yii\db\Query;
  * @property string|null $nomeEsercizio
  * @property string|null $Domanda
  * @property string|null $Risposta
- *
+ * @property string|null $rating
+ * @property string|null $file
  * @property Logopedista $logopedistaIdLogopedista
  * @property Paziente[] $pazienteIdPazientes
  * @property PazienteSvolgeEsercizio[] $pazienteSvolgeEsercizios
@@ -43,7 +44,8 @@ class Esercizio extends \yii\db\ActiveRecord
             [['tipologia', 'Risposta','nomeEsercizio'], 'string', 'max' => 45],
             [['Domanda'], 'string', 'max' => 300],
             [['Logopedista_idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['Logopedista_idLogopedista' => 'idLogopedista']],
-        ];
+            [['file'], 'file', 'extensions' => 'jpg, png', 'mimeTypes' => 'image/jpeg, image/png',],
+            ];
     }
 
     /**
@@ -58,6 +60,8 @@ class Esercizio extends \yii\db\ActiveRecord
             'Domanda' => 'Domanda',
             'Risposta' => 'Risposta',
             'nomeEsercizio'=>'Nome Esercizio',
+            'file'=>'File',
+            'rating'=>'Rating',
         ];
     }
 
@@ -114,7 +118,7 @@ class Esercizio extends \yii\db\ActiveRecord
         $query = new Query;
 
         $logopedista=Yii::$app->user->id;
-        $esercizi= $query->select('*')->from('Esercizio')
+        $esercizi= $query->select('idEsercizio,nomeEsercizio')->from('Esercizio')
             ->where("Esercizio.Logopedista_idLogopedista='$logopedista'")
             ->orWhere(['Esercizio.Logopedista_idLogopedista' => null])->all();
         return $esercizi;

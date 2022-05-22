@@ -18,6 +18,7 @@ use Yii;
  * @property int $numeroTelefono
  * @property int $idIndirizzo
  * @property int $authKey
+ * @property string $diagnosi
  *
  * @property Caregiver $caregiver
  * @property Indirizzo $idIndirizzo0
@@ -51,6 +52,7 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['idIndirizzo'], 'exist', 'skipOnError' => true, 'targetClass' => Indirizzo::className(), 'targetAttribute' => ['idIndirizzo' => 'idIndirizzo']],
             [['password'], 'match', 'pattern' => '$\S*(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$', 'message' => 'Password must have atleast 1 uppercase and 1 number '],
             [['email'], 'match', 'pattern' =>  '/^[a-zA-Z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/', 'message' => 'Email non valida'],
+            [['diagnosi'], 'string', 'max' => 9999],
         ];
     }
 
@@ -70,6 +72,7 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'password' => 'Password',
             'numeroTelefono' => 'Numero Telefono',
             'authKey' => 'Auth Key',
+            'diagnosi'=>'Diagnosi',
         ];
     }
 
@@ -140,5 +143,8 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function validatePassword($password){
         return $this->password === $password;
     }
+
+
+
 
 }

@@ -1,5 +1,6 @@
 <?php
 
+use kartik\rating\StarRating;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -11,7 +12,7 @@ $logopedista=Yii::$app->user->id;
 
 <div class="esercizio-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'tipologia')->dropDownList([
         'Storia' => 'Storia',
@@ -26,10 +27,21 @@ $logopedista=Yii::$app->user->id;
 
     <?= $form->field($model, 'nomeEsercizio')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'file')->fileInput() ?>
+
 
     <?= $form->field($model, 'Domanda')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Risposta')->textInput(['maxlength' => true]) ?>
+
+  <?=  $form->field($model, 'rating')->widget(StarRating::classname(), [
+    'pluginOptions' => [
+    'stars' => 5,
+    'step' => 0.50,
+    'min' => 0,
+    'max' => 5,
+    ]
+    ]);?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

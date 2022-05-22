@@ -6,7 +6,6 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\TerapiaHasEsercizio */
-/* @var $modelTerapia app\models\Terapia */
 
 /* @var $form yii\widgets\ActiveForm */
 /* @var $esercizi */
@@ -19,20 +18,18 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'Terapia_idTerapia')->dropDownList(
-        ArrayHelper::map($pazienti, 'idTerapia', 'email','dataFine'),
-        ['prompt'=>'Seleziona Terapia-Paziente']
+        ArrayHelper::map($pazienti, 'idTerapia', 'email'),
+        ['prompt'=>'Seleziona Paziente']
     );?>
+<?=
+
+$form->field($model, 'Esercizio_idEsercizio')->dropDownList(
+    ArrayHelper::map($esercizi, 'idEsercizio', 'nomeEsercizio'),
+    ['prompt'=>'Esercizio']
+);
 
 
-    <?=
-
-    $form->field($model, 'Esercizio_idEsercizio')->dropDownList(
-        ArrayHelper::map($esercizi, 'idEsercizio', 'nomeEsercizio'),
-        ['prompt'=>'Esercizio']
-    );
-    ?>
-
-
+?>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

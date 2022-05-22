@@ -41,7 +41,9 @@ class TerapiaSearch extends Terapia
     public function search($params)
     {$logopedista=Yii::$app->user->id;
 
-        $query = Terapia::find()->select('*')->from('Terapia')->join("JOIN","Logopedista","Terapia.idLogopedista=Logopedista.idLogopedista")
+        $query = Terapia::find()->select('*')->from('Terapia')
+            ->join("JOIN","Logopedista","Terapia.idLogopedista=Logopedista.idLogopedista")
+            ->join("JOIN","Utente","Terapia.idPaziente=Utente.idUtente")
             ->where("Terapia.idLogopedista='$logopedista'");
 
 

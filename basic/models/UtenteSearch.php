@@ -85,7 +85,8 @@ class UtenteSearch extends Utente
     public function searchPazienti($params)
     {  $logopedista=Yii::$app->user->id;
 
-       $query = Utente::find()->select('*')->from('Utente')->join("JOIN","Paziente","Utente.idUtente=Paziente.idPaziente")
+       $query = Utente::find()->select('*')->from('Utente')
+           ->join("JOIN","Paziente","Utente.idUtente=Paziente.idPaziente")
            ->where("Paziente.idLogopedista='$logopedista'");
 
         // add conditions that should always apply here

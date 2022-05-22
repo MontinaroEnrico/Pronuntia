@@ -7,6 +7,7 @@ use app\models\EsercizioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * EsercizioController implements the CRUD actions for Esercizio model.
@@ -70,7 +71,9 @@ class EsercizioController extends Controller
         $model = new Esercizio();
 
         if ($this->request->isPost) {
+
             if ($model->load($this->request->post()) && $model->save()) {
+
                 return $this->redirect(['view', 'idEsercizio' => $model->idEsercizio]);
             }
         } else {
@@ -81,6 +84,8 @@ class EsercizioController extends Controller
             'model' => $model,
         ]);
     }
+
+
 
     /**
      * Updates an existing Esercizio model.

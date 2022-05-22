@@ -3,12 +3,13 @@
 namespace app\models;
 
 use Yii;
+use yii\jui\Widget;
 
 /**
  * This is the model class for table "Terapia_has_Esercizio".
  *
  * @property String $Terapia_idTerapia
- * @property String[] $Esercizio_idEsercizio
+ * @property String $Esercizio_idEsercizio
  *
  * @property Esercizio $esercizioIdEsercizio
  * @property Terapia $terapiaIdTerapia
@@ -31,7 +32,6 @@ class TerapiaHasEsercizio extends \yii\db\ActiveRecord
         return [
             [['Terapia_idTerapia', 'Esercizio_idEsercizio'], 'required'],
             [['Terapia_idTerapia'], 'string'],
-            [['Esercizio_idEsercizio'], 'string'],
         ];
     }
 

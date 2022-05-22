@@ -79,7 +79,7 @@ class TerapiaController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['/terapia-has-esercizio/create', 'Terapia_idTerapia' => $model->idTerapia]);
+                return $this->redirect(['/terapia-has-esercizio/create', 'modelTerapia' => $model]);
             }
         } else {
             $model->loadDefaultValues();

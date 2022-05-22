@@ -1,7 +1,9 @@
 <?php
 
+use kartik\rating\StarRating;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EsercizioSearch */
@@ -24,6 +26,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'Domanda') ?>
 
     <?= $form->field($model, 'Risposta') ?>
+
+
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

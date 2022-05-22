@@ -10,20 +10,15 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Terapia */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $modelUtente app\models\Utente*/
-/* @var $pazienti */
+
 
 ?>
-
+<?php $modelUtente=\app\models\UtenteSearch::findIdentity($model->idPaziente) ?>
 <div class="terapia-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <?php $i=0?>
-    <h3>A chi vuole assegnare la nuova terapia?</h3>
-    <?= $form->field($model,'idLogopedista')->hiddenInput(array('value'=>Yii::$app->user->id))->label(false) ?>
-    <?= $form->field($model, 'idPaziente')->dropDownList(
-        ArrayHelper::map($pazienti, 'idUtente', 'email'),
-        ['prompt'=>'Seleziona Paziente']
-    );
+    <h3>Modifica Terapia</h3>
+    <?= $form->field($modelUtente, 'email')->hiddenInput(array($modelUtente->email))->textarea();
 
 
     ?>
@@ -32,11 +27,11 @@ use yii\widgets\ActiveForm;
 
 
 
-    <?= $form->field($model, 'idTerapia')->hiddenInput(array(""))->label(false) ?>
+    <?= $form->field($model, 'idTerapia')->hiddenInput(array($model->idTerapia))->label(false); ?>
 
 
     <div class="form-group">
-        <?= Html::submitButton('CREA', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Submit', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

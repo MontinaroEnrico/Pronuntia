@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $modelIndirizzo app\models\Indirizzo */
 
 $this->title = 'Registrazione';
-
+$this->params['breadcrumbs'][] = ['label' => 'Utentes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="utente-create">
