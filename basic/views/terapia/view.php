@@ -29,10 +29,13 @@ $model->email=$datiPaziente->email;
             ],
         ]) ?>
     </p>
-    <?=
+
+    <?php
     $tot = Yii::$app->db->createCommand('SELECT count(*) as tot FROM Terapia_has_Esercizio where Terapia_idTerapia= "'.$model->idTerapia.'"')->queryScalar();
     $completati = Yii::$app->db->createCommand('SELECT count(*) as tot FROM Terapia_has_Esercizio where Terapia_idTerapia= "'.$model->idTerapia.'" AND stato="Completato"')->queryScalar();
-
+if($tot==0){
+    $tot=1;
+}
     ?>
 
 

@@ -17,7 +17,6 @@ use yii\widgets\ActiveForm;
 <div class="terapia-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <?php $i=0?>
     <h3>A chi vuole assegnare la nuova terapia?</h3>
     <?= $form->field($model,'idLogopedista')->hiddenInput(array('value'=>Yii::$app->user->id))->label(false) ?>
     <?= $form->field($model, 'idPaziente')->dropDownList(

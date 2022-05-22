@@ -14,8 +14,8 @@ use yii\db\Query;
  * @property string|null $nomeEsercizio
  * @property string|null $Domanda
  * @property string|null $Risposta
- * @property string|null $rating
- * @property string|null $file
+ * @property float|null $rating
+ * @property string $file
  * @property Logopedista $logopedistaIdLogopedista
  * @property Paziente[] $pazienteIdPazientes
  * @property PazienteSvolgeEsercizio[] $pazienteSvolgeEsercizios
@@ -44,7 +44,8 @@ class Esercizio extends \yii\db\ActiveRecord
             [['tipologia', 'Risposta','nomeEsercizio'], 'string', 'max' => 45],
             [['Domanda'], 'string', 'max' => 300],
             [['Logopedista_idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['Logopedista_idLogopedista' => 'idLogopedista']],
-            [['file'], 'file', 'extensions' => 'jpg, png', 'mimeTypes' => 'image/jpeg, image/png',],
+            [['file'], 'file'],
+            [['rating'],'string'],
             ];
     }
 
@@ -122,5 +123,12 @@ class Esercizio extends \yii\db\ActiveRecord
             ->where("Esercizio.Logopedista_idLogopedista='$logopedista'")
             ->orWhere(['Esercizio.Logopedista_idLogopedista' => null])->all();
         return $esercizi;
+    }
+    public function upload()
+    {
+            $this->file->saveAs($this->file->baseName .'.' . $this->file->extension);
+            return true;
+
+
     }
 }
