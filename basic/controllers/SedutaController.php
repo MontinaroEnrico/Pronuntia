@@ -2,18 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Esercizio;
-use app\models\EsercizioSearch;
-use yii\helpers\StringHelper;
+use app\models\Seduta;
+use app\models\SedutaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * EsercizioController implements the CRUD actions for Esercizio model.
+ * SedutaController implements the CRUD actions for Seduta model.
  */
-class EsercizioController extends Controller
+class SedutaController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,13 +32,13 @@ class EsercizioController extends Controller
     }
 
     /**
-     * Lists all Esercizio models.
+     * Lists all Seduta models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new EsercizioSearch();
+        $searchModel = new SedutaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -50,34 +48,29 @@ class EsercizioController extends Controller
     }
 
     /**
-     * Displays a single Esercizio model.
-     * @param int $idEsercizio Id Esercizio
+     * Displays a single Seduta model.
+     * @param int $idSeduta Id Seduta
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idEsercizio)
+    public function actionView($idSeduta)
     {
         return $this->render('view', [
-            'model' => $this->findModel($idEsercizio),
+            'model' => $this->findModel($idSeduta),
         ]);
     }
 
     /**
-     * Creates a new Esercizio model.
+     * Creates a new Seduta model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Esercizio();
-
+        $model = new Seduta();
         if ($this->request->isPost) {
-            $model->file = UploadedFile::getInstance($model, 'file');
-            if($model->file!=null){
-                 $model->upload();
-            }
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'idEsercizio' => $model->idEsercizio]);
+                return $this->redirect(['view', 'idSeduta' => $model->idSeduta]);
             }
         } else {
             $model->loadDefaultValues();
@@ -88,23 +81,19 @@ class EsercizioController extends Controller
         ]);
     }
 
-
-
-
-
     /**
-     * Updates an existing Esercizio model.
+     * Updates an existing Seduta model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $idEsercizio Id Esercizio
+     * @param int $idSeduta Id Seduta
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idEsercizio)
+    public function actionUpdate($idSeduta)
     {
-        $model = $this->findModel($idEsercizio);
+        $model = $this->findModel($idSeduta);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idEsercizio' => $model->idEsercizio]);
+            return $this->redirect(['view', 'idSeduta' => $model->idSeduta]);
         }
 
         return $this->render('update', [
@@ -113,29 +102,29 @@ class EsercizioController extends Controller
     }
 
     /**
-     * Deletes an existing Esercizio model.
+     * Deletes an existing Seduta model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $idEsercizio Id Esercizio
+     * @param int $idSeduta Id Seduta
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idEsercizio)
+    public function actionDelete($idSeduta)
     {
-        $this->findModel($idEsercizio)->delete();
+        $this->findModel($idSeduta)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Esercizio model based on its primary key value.
+     * Finds the Seduta model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $idEsercizio Id Esercizio
-     * @return Esercizio the loaded model
+     * @param int $idSeduta Id Seduta
+     * @return Seduta the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($idEsercizio)
+    protected function findModel($idSeduta)
     {
-        if (($model = Esercizio::findOne(['idEsercizio' => $idEsercizio])) !== null) {
+        if (($model = Seduta::findOne(['idSeduta' => $idSeduta])) !== null) {
             return $model;
         }
 

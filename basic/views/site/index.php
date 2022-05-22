@@ -1,6 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+/** @var yii\web\View $this */
+
+$this->title = 'My Yii Application';
 
 ?>
 <!DOCTYPE html>
@@ -18,7 +21,7 @@ use yii\helpers\Html;
     <div class="text-center my-5">
        <img src="<?= \Yii::getAlias('@web/imgLogopedista.jpg') ?>" height="60%" width="90%">
     </div>
-<!-- Content section-->
+<!--
 <section class="py-5">
     <div class="container my-5">
         <div class="row justify-content-center">
@@ -30,12 +33,12 @@ use yii\helpers\Html;
         </div>
     </div>
 </section>
-<!-- Image element - set the background image for the header in the line below-->
+
 <div class="py-5 bg-image-full" style="background-image: url(<?= \Yii::getAlias('@web/imgLogopedista.jpg') ?>)">
-    <!-- Put anything you want here! The spacer below with inline CSS is just for demo purposes!-->
+
     <div style="height: 20rem"></div>
 </div>
-<!-- Content section-->
+
 <section class="py-5">
     <div class="container my-5">
         <div class="row justify-content-center">
@@ -47,11 +50,11 @@ use yii\helpers\Html;
         </div>
     </div>
 </section>
-<!-- Footer-->
+
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
 </footer>
-<!-- Bootstrap core JS-->
+-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>

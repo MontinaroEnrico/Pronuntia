@@ -3,14 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Utente */
-/* @var $modelIndirizzo app\models\Indirizzo */
+/* @var $model app\models\Seduta */
 
-$this->title = 'Registrazione';
-$this->params['breadcrumbs'][] = ['label' => 'Utentes', 'url' => ['index']];
+$this->title = 'Create Seduta';
+$this->params['breadcrumbs'][] = ['label' => 'Sedutas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="utente-create">
+<div class="seduta-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

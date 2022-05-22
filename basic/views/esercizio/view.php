@@ -36,9 +36,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'Logopedista_idLogopedista',
             'Domanda',
             'Risposta',
-            'rating'
+            'file',
+
         ],
-    ]) ?>
+    ]);
+    echo StarRating::widget([
+        'name' => 'rating',
+        'value' => $model->rating,
+        'pluginOptions' => ['disabled'=>true, 'showClear'=>false]
+    ]);?>
+
 
 
 

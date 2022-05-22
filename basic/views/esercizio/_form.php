@@ -8,6 +8,14 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Esercizio */
 /* @var $form yii\widgets\ActiveForm */
 $logopedista=Yii::$app->user->id;
+/* $form->field($model, 'rating')->widget(StarRating::classname(), [
+   'pluginOptions' => [
+   'stars' => 5,
+   'step' => 0.50,
+   'min' => 0,
+   'max' => 5,
+   ]
+   ]);*/
 ?>
 
 <div class="esercizio-form">
@@ -34,14 +42,11 @@ $logopedista=Yii::$app->user->id;
 
     <?= $form->field($model, 'Risposta')->textInput(['maxlength' => true]) ?>
 
-  <?=  $form->field($model, 'rating')->widget(StarRating::classname(), [
-    'pluginOptions' => [
-    'stars' => 5,
-    'step' => 0.50,
-    'min' => 0,
-    'max' => 5,
-    ]
-    ]);?>
+   <?php /* echo $form->field($model, 'rating')->widget(StarRating::classname(), [
+    'pluginOptions' => ['size'=>'lg']
+    ]);
+   $model->rating=is_float($model->rating)*/
+  ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

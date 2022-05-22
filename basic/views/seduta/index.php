@@ -1,24 +1,27 @@
 <?php
 
-use app\models\Utente;
+use app\models\Seduta;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\UtenteSearch */
+/* @var $searchModel app\models\SedutaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Utentes';
+$this->title = 'Sedutas';
 $this->params['breadcrumbs'][] = $this->title;
+$logopedista=new \app\models\Logopedista();
+$logopedistaLogged=$logopedista->logopedistaLogged();
 ?>
-<div class="utente-index">
+<div class="seduta-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Utente', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php if(!$logopedistaLogged){
+        echo Html::a('Richiedi Seduta', ['create'], ['class' => 'btn btn-success']);} ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,21 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idUtente',
-            'nome',
-            'cognome',
-            'email:email',
-            'dataDiNascita',
-            //'luogoDiNascita',
-            //'codiceFiscale',
-            //'password',
-            //'numeroTelefono',
-            //'idIndirizzo',
-            //'authKey',
+           // 'idSeduta',
+            //'idPaziente',
+           // 'Logopedista_idLogopedista',
+            'data',
+            'ora',
+            'stato',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Utente $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'idUtente' => $model->idUtente]);
+                'urlCreator' => function ($action, Seduta $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'idSeduta' => $model->idSeduta]);
                  }
             ],
         ],

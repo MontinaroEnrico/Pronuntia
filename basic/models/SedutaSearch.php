@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Terapia;
+use app\models\Seduta;
 
 /**
- * TerapiaSearch represents the model behind the search form of `app\models\Terapia`.
+ * SedutaSearch represents the model behind the search form of `app\models\Seduta`.
  */
-class TerapiaSearch extends Terapia
+class SedutaSearch extends Seduta
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,8 @@ class TerapiaSearch extends Terapia
     public function rules()
     {
         return [
-            [['idTerapia'], 'integer'],
+            [['idSeduta', 'idPaziente', 'Logopedista_idLogopedista'], 'integer'],
+            [['data', 'ora', 'stato'], 'safe'],
         ];
     }
 
@@ -39,13 +40,11 @@ class TerapiaSearch extends Terapia
      * @return ActiveDataProvider
      */
     public function search($params)
-    {$userlogged=Yii::$app->user->id;
+    {   $userLog=Yii::$app->user->id;
+        $query = Seduta::find()->select('*')->from('Seduta')
 
-        $query = Terapia::find()->select('*')->from('Terapia')
-            ->join("JOIN","Logopedista","Terapia.idLogopedista=Logopedista.idLogopedista")
-            ->join("JOIN","Utente","Terapia.idPaziente=Utente.idUtente")
-            ->where("Terapia.idLogopedista='$userlogged' OR Terapia.idPaziente='$userlogged'");
-
+                ->where("Logopedista_idLogopedista='$userLog' OR idPaziente='$userLog'");
+        ;
 
         // add conditions that should always apply here
 
@@ -63,8 +62,14 @@ class TerapiaSearch extends Terapia
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'idTerapia' => $this->idTerapia,
+            'idSeduta' => $this->idSeduta,
+            'idPaziente' => $this->idPaziente,
+            'Logopedista_idLogopedista' => $this->Logopedista_idLogopedista,
+            'ora' => $this->ora,
         ]);
+
+        $query->andFilterWhere(['like', 'data', $this->data])
+            ->andFilterWhere(['like', 'stato', $this->stato]);
 
         return $dataProvider;
     }

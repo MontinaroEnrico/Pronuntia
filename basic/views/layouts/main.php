@@ -44,10 +44,6 @@ $idPaziente=$modelPaziente->pazienteLogged();
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            
-
-
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -99,7 +95,7 @@ $idPaziente=$modelPaziente->pazienteLogged();
 
                 . '</li>'
             ),
-/*
+
             $idLogopedista>0 ? (
                 ['label' => 'Gestione Esercizi', 'url' => ['#'], 'items' => [
                 ['label' => 'Crea esercizio', 'url' => ['/esercizio/create']],
@@ -109,7 +105,23 @@ $idPaziente=$modelPaziente->pazienteLogged();
 
                 . '</li>'
             ),
-*/
+            $idPaziente>0 ? (
+                ['label' => 'Visualizza Terapie', 'url' => ['/terapia/index']]
+
+            ):(
+                '<li>'
+
+                . '</li>'
+            ),
+            $idPaziente>0 || $idLogopedista>0 ? (
+            ['label' => 'Gestisci Sedute', 'url' => ['/seduta/index']]
+
+            ):(
+                '<li>'
+
+                . '</li>'
+            ),
+
         ],
     ]);
     NavBar::end();
