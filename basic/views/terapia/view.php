@@ -32,10 +32,12 @@ $model->email=$datiPaziente->email;
 
     <?php
     $tot = Yii::$app->db->createCommand('SELECT count(*) as tot FROM Terapia_has_Esercizio where Terapia_idTerapia= "'.$model->idTerapia.'"')->queryScalar();
-    $completati = Yii::$app->db->createCommand('SELECT count(*) as tot FROM Terapia_has_Esercizio where Terapia_idTerapia= "'.$model->idTerapia.'" AND stato="Completato"')->queryScalar();
-if($tot==0){
-    $tot=1;
-}
+    $completati = Yii::$app->db->createCommand('SELECT count(*) as tot FROM Paziente_svolge_Esercizio where idTerapia= "'.$model->idTerapia.'" AND svolgimento="Bene"')->queryScalar();
+    $male = Yii::$app->db->createCommand('SELECT count(*) as tot FROM Paziente_svolge_Esercizio where idTerapia= "'.$model->idTerapia.'" AND svolgimento="Male"')->queryScalar();
+    if($tot==0){
+        $tot=1;
+    }
+    $daSvolgere=$tot-$completati-$male
     ?>
 
 
@@ -51,6 +53,11 @@ if($tot==0){
     <?php echo Progress::widget([
         'percent' => ($completati/$tot)*100,
         'barOptions' => ['class' => ['bg-success', 'progress-bar-animated', 'progress-bar-striped']]
-    ]);?>
+    ]);
+    ?>
+    <?php echo "<p>Gli esercizi svolti bene sono: $completati</p>";
+    echo "<p>Gli esercizi svolti male sono: $male</p>";
+    echo "<p>Gli esercizi da svolgere sono: $daSvolgere</p>";
+    ?>
 
 </div>

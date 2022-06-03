@@ -16,17 +16,26 @@ use yii\db\Query;
  * @property string|null $Risposta
  * @property float|null $rating
  * @property string $file
+ * @property string $link
  * @property Logopedista $logopedistaIdLogopedista
  * @property Paziente[] $pazienteIdPazientes
  * @property PazienteSvolgeEsercizio[] $pazienteSvolgeEsercizios
  * @property TerapiaHasEsercizio[] $terapiaHasEsercizios
  * @property Terapia[] $terapiaIdTerapias
+
  */
 class Esercizio extends \yii\db\ActiveRecord
 {
     /**
+     * @var mixed|string|null
+     */
+    public $nomeFile;
+
+    /**
      * {@inheritdoc}
      */
+
+
     public static function tableName()
     {
         return 'Esercizio';
@@ -45,7 +54,7 @@ class Esercizio extends \yii\db\ActiveRecord
             [['Domanda'], 'string', 'max' => 300],
             [['Logopedista_idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['Logopedista_idLogopedista' => 'idLogopedista']],
             [['file'], 'file'],
-            [['rating'],'string'],
+            [['rating','link'],'string'],
             ];
     }
 
@@ -63,6 +72,7 @@ class Esercizio extends \yii\db\ActiveRecord
             'nomeEsercizio'=>'Nome Esercizio',
             'file'=>'File',
             'rating'=>'Rating',
+            'link'=>'Esercizio',
         ];
     }
 

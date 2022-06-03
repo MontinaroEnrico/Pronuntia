@@ -1,5 +1,6 @@
 <?php
 
+use denar90\waveSurferAudio\WaveSurferAudioWidget;
 use kartik\rating\StarRating;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -36,10 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'Logopedista_idLogopedista',
             'Domanda',
             'Risposta',
-            'file',
 
         ],
     ]);
+    ?>
+    <div>
+    <audio controls>
+        <source src="<?= \Yii::getAlias('@web/CanzoneDelBus.mp3') ?>"  type="audio/ogg">
+
+    </audio>
+</div>
+<?php
+
     echo StarRating::widget([
         'name' => 'rating',
         'value' => $model->rating,

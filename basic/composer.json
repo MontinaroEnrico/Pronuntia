@@ -25,7 +25,8 @@
         "tomlutzenberger/yii2-smartsupp-chat": "*",
         "inquid/yii2-inquid-zendesk-chat": "*",
         "kartik-v/yii2-widget-rating": "@dev",
-        "yiisoft/yii2-bootstrap": "~2.0.0"
+        "yiisoft/yii2-bootstrap": "~2.0.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
