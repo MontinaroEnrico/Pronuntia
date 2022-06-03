@@ -168,5 +168,15 @@ class Paziente extends \yii\db\ActiveRecord
 
         return $pazienti;
     }
+    public function getPazienteForView($idPaziente){
+        $pazienti=$this->getPazientiLogopedistalogged();
+
+        foreach ($pazienti as $id) {
+            if ($id['idPaziente'] == $idPaziente) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

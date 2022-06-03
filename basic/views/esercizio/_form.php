@@ -37,7 +37,6 @@ $logopedista=Yii::$app->user->id;
 
     <?= $form->field($model, 'file')->fileInput() ?>
 
-
     <?= $form->field($model, 'Domanda')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Risposta')->textInput(['maxlength' => true]) ?>

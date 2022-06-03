@@ -4,9 +4,12 @@ namespace app\controllers;
 
 use app\models\Esercizio;
 use app\models\Paziente;
+use app\models\PazienteSvolgeEsercizio;
 use app\models\Terapia;
 use app\models\TerapiaHasEsercizio;
 use app\models\TerapiaHasEsercizioSearch;
+use app\models\TerapiaSearch;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -76,10 +79,20 @@ class TerapiaHasEsercizioController extends Controller
         $esercizi=$modelesercizo->getEserciziDisponibili();
         $paziente=new Paziente();
         $pazienti=$paziente->getPazientiAssegnaEsercizi();
+        $modelPazienteSvolgeEsercizio=new PazienteSvolgeEsercizio();
+
+        $query= new Query();
 
         if ($this->request->isPost) {
 
             if ($model->load($this->request->post()) && $model->save()) {
+                $modelPazienteSvolgeEsercizio->Esercizio_idEsercizio=$model->Esercizio_idEsercizio;
+               $modelTerapia= $query->select('*')->from("Terapia")->where("idTerapia='$model->Terapia_idTerapia'")->all();
+               $modelPazienteSvolgeEsercizio->Paziente_idPaziente=$modelTerapia[0]['idPaziente'];
+               $modelPazienteSvolgeEsercizio->idTerapia=$model->Terapia_idTerapia;
+               $modelPazienteSvolgeEsercizio->stato ="Da svolgere";
+               $modelPazienteSvolgeEsercizio->save();
+
                 return $this->redirect(['/terapia-has-esercizio/create', 'Terapia_idTerapia' => $model->Terapia_idTerapia, 'Esercizio_idEsercizio' => $model->Esercizio_idEsercizio]);
             }
         } else {

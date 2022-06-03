@@ -79,6 +79,9 @@ class UtenteController extends Controller
                 }elseif ( (new Logopedista())->logopedistaLogged()){
                     Yii::$app->db->createCommand("INSERT INTO Paziente (idPaziente,idLogopedista) VALUES ($model->idUtente,$idLogopedista)")
                         ->queryAll();
+                    Yii::$app->db->createCommand("INSERT INTO Classifica (idPaziente,posizione,punti) VALUES ($model->idUtente,2,10)")
+                        ->queryAll();
+
                 }
                 return $this->redirect(['view', 'idUtente' => $model->idUtente]);
             }

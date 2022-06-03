@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Esercizio;
 use app\models\EsercizioSearch;
+use app\models\PazienteSvolgeEsercizioSearch;
 use yii\helpers\StringHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,6 +62,19 @@ class EsercizioController extends Controller
             'model' => $this->findModel($idEsercizio),
         ]);
     }
+    /**
+     * Displays a single Esercizio model.
+     * @param int $idEsercizio Id Esercizio
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionSvolgiesercizio($idEsercizio)
+    {
+        return $this->render('svolgiesercizio', [
+            'model' => $this->findModel($idEsercizio),
+        ]);
+    }
+
 
     /**
      * Creates a new Esercizio model.
@@ -73,12 +87,12 @@ class EsercizioController extends Controller
 
         if ($this->request->isPost) {
             $model->file = UploadedFile::getInstance($model, 'file');
-            if($model->file!=null){
-                 $model->upload();
+            if($model->file!=null) {
+                $model->upload();
             }
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post()) && $model->save())
                 return $this->redirect(['view', 'idEsercizio' => $model->idEsercizio]);
-            }
+
         } else {
             $model->loadDefaultValues();
         }
