@@ -84,7 +84,7 @@ border-radius: 50%;
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body class="d-flex flex-column h-100">
@@ -97,7 +97,7 @@ border-radius: 50%;
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,*/
         'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+            'class' => 'navbar navbar-expand-md navbar-dark bg-success fixed-top',
         ],
     ]);
 

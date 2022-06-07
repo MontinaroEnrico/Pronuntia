@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="indirizzo-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?= Html::a('Create Indirizzo', ['create'], ['class' => 'btn btn-success']) ?>

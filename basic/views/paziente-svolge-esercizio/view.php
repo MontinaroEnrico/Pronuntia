@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="paziente-svolge-esercizio-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'Paziente_idPaziente' => $model->Paziente_idPaziente, 'Esercizio_idEsercizio' => $model->Esercizio_idEsercizio], ['class' => 'btn btn-primary']) ?>

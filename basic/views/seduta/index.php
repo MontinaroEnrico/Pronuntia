@@ -17,7 +17,7 @@ $logopedistaLogged=$logopedista->logopedistaLogged();
 ?>
 <div class="seduta-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?php if(!$logopedistaLogged){

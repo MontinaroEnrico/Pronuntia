@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="terapia-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?=\yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
 
     <?= $this->render('_formUpdate', [
         'model' => $model,
