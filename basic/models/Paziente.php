@@ -37,6 +37,7 @@ class Paziente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['idPaziente','idCaregiver','idLogopedista','idQuestionario'],'filter','filter'=>'\yii\helpers\HtmlPurifier::process'],
             [['idPaziente', 'idLogopedista'], 'required'],
             [['idPaziente', 'idCaregiver', 'idLogopedista', 'idQuestionario'], 'integer'],
             [['idPaziente'], 'unique'],

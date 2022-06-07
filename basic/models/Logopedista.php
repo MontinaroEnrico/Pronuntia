@@ -32,6 +32,7 @@ class Logopedista extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['idLogopedista'],'filter','filter'=>'\yii\helpers\HtmlPurifier::process'],
             [['idLogopedista'], 'required'],
             [['idLogopedista'], 'integer'],
             [['idLogopedista'], 'unique'],

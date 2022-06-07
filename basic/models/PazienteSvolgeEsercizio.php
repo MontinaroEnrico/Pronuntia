@@ -34,6 +34,7 @@ class PazienteSvolgeEsercizio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['idSvolgimento','idTerapia','Paziente_idPaziente','Esercizio_idEsercizio','risposta','rating','stato','svolgimento'],'filter','filter'=>'\yii\helpers\HtmlPurifier::process'],
             [['Paziente_idPaziente', 'Esercizio_idEsercizio'], 'required'],
             [['Paziente_idPaziente', 'Esercizio_idEsercizio'], 'integer'],
             [['risposta', 'rating','stato'], 'string', 'max' => 45],

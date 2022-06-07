@@ -32,6 +32,7 @@ class Indirizzo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['idIndirizzo','citta','cap','numeroCivico','provincia','via'],'filter','filter'=>'\yii\helpers\HtmlPurifier::process'],
             [['citta', 'provincia', 'via', 'numeroCivico', 'cap'], 'required'],
             [['numeroCivico', 'cap'], 'integer'],
             [['citta', 'provincia', 'via'], 'string', 'max' => 45],
