@@ -19,7 +19,7 @@ $idPaziente= $paziente->getPazienteForView($request->get('idUtente'))
 ?>
     <div class="utente-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
 <?php if($idPaziente || Yii::$app->user->id==$request->get('idUtente')){
     ?>
 

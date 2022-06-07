@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="esercizio-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'idEsercizio' => $model->idEsercizio], ['class' => 'btn btn-primary']) ?>

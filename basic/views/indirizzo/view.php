@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="indirizzo-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'idIndirizzo' => $model->idIndirizzo], ['class' => 'btn btn-primary']) ?>
