@@ -1,4 +1,6 @@
 <?php
+
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 
 /** @var \yii\web\View $this view component instance */
@@ -10,7 +12,7 @@ use yii\helpers\Html;
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=<?= Yii::$app->charset ?>" />
-    <title><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></title>
+    <title><?=BaseHtmlPurifier::process($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>

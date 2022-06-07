@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 /** @var yii\web\View $this */
 
@@ -12,7 +13,7 @@ $this->title = 'My Yii Application';
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
-    <title><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></title>
+    <title><?= BaseHtmlPurifier::process($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body  class="d-flex flex-column h-100">

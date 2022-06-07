@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Classifica;
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="classifica-index">
 
-    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><?= BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?= Html::a('Create Classifica', ['create'], ['class' => 'btn btn-success']) ?>

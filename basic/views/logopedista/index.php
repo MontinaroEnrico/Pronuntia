@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Utente;
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="utente-index">
 
-    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><?= BaseHtmlPurifier::process($this->title) ?></h1>
 
 
     <?php $url="/utente/view"// echo $this->render('_search', ['model' => $searchModel]); ?>

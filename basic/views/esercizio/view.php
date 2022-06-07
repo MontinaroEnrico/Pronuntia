@@ -2,6 +2,7 @@
 
 use denar90\waveSurferAudio\WaveSurferAudioWidget;
 use kartik\rating\StarRating;
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\bootstrap;
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="esercizio-view">
 
-    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><?= BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'idEsercizio' => $model->idEsercizio], ['class' => 'btn btn-primary']) ?>

@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Seduta;
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -17,7 +18,7 @@ $logopedistaLogged=$logopedista->logopedistaLogged();
 ?>
 <div class="seduta-index">
 
-    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><?= BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?php if(!$logopedistaLogged){

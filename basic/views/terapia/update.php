@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -13,7 +14,7 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="terapia-update">
 
-    <h1><?=\yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><? BaseHtmlPurifier::process($this->title) ?></h1>
 
     <?= $this->render('_formUpdate', [
         'model' => $model,

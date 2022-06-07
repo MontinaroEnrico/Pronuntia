@@ -1,6 +1,7 @@
 <?php
 
 use yii\bootstrap4\Progress;
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -14,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="terapia-has-esercizio-view">
 
-    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><?= BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'Terapia_idTerapia' => $model->Terapia_idTerapia, 'Esercizio_idEsercizio' => $model->Esercizio_idEsercizio], ['class' => 'btn btn-primary']) ?>
