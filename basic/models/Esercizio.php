@@ -47,6 +47,7 @@ class Esercizio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['idEsercizio','logopedistaIdLogopedista','nomeEsercizio','tipologia','Risposta','Domanda','file','rating'],'filter','filter'=>'\yii\helpers\HtmlPurifier::process'],
             [['Logopedista_idLogopedista'], 'required'],
             [['nomeEsercizio'], 'required'],
             [['Logopedista_idLogopedista'], 'integer'],

@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use yii\helpers\BaseHtmlPurifier;
 
 use Yii;
 
@@ -27,9 +28,11 @@ class Classifica extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
     public function rules()
     {
         return [
+            [['idClassifica','idPaziente','posizione','punti'],'filter','filter'=>'\yii\helpers\HtmlPurifier::process'],
             [['idPaziente'], 'required'],
             [['idPaziente', 'posizione'], 'integer'],
             [['punti'], 'string', 'max' => 45],

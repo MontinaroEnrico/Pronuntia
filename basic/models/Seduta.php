@@ -33,6 +33,7 @@ class Seduta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['idSeduta','idPaziente','Logopedista_idLogopedista','data','ora','stato'],'filter','filter'=>'\yii\helpers\HtmlPurifier::process'],
             [['idPaziente', 'Logopedista_idLogopedista', 'stato'], 'required'],
             [['idPaziente', 'Logopedista_idLogopedista'], 'integer'],
             [['ora'], 'safe'],
