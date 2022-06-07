@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -14,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="indirizzo-index">
 
-    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><?= BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?= Html::a('Create Indirizzo', ['create'], ['class' => 'btn btn-success']) ?>

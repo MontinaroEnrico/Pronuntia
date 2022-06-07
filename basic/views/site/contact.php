@@ -7,12 +7,13 @@
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 use yii\captcha\Captcha;
+use yii\helpers\BaseHtmlPurifier;
 
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
-    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><?= BaseHtmlPurifier::process($this->title) ?></h1>
 
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 

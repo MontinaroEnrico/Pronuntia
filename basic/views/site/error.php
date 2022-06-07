@@ -5,13 +5,14 @@
 /** @var string $message */
 /** @var Exception$exception */
 
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 
 $this->title = $name;
 ?>
 <div class="site-error">
 
-    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><?= BaseHtmlPurifier::process($this->title) ?></h1>
 
     <div class="alert alert-danger">
         <?= nl2br(\yii\helpers\BaseHtmlPurifier::process($message)) ?>

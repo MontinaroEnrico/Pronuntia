@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -13,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="indirizzo-view">
 
-    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><?= BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'idIndirizzo' => $model->idIndirizzo], ['class' => 'btn btn-primary']) ?>

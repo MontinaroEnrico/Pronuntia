@@ -10,6 +10,8 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use yii\helpers\BaseHtmlPurifier;
+
 AppAsset::register($this);
 $modelLogopedista=new Logopedista();
 $idLogopedista= $modelLogopedista->logopedistaLogged();
@@ -84,7 +86,7 @@ border-radius: 50%;
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
-    <title><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></title>
+    <title><?= BaseHtmlPurifier::process($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body class="d-flex flex-column h-100">

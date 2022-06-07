@@ -1,6 +1,7 @@
 <?php
 
 use yii\bootstrap4\Progress;
+use yii\helpers\BaseHtmlPurifier;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -17,7 +18,7 @@ $model->email=$datiPaziente->email;
 ?>
 <div class="terapia-view">
 
-    <h1><?= \yii\helpers\BaseHtmlPurifier::process($this->title) ?></h1>
+    <h1><?= BaseHtmlPurifier::process($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'idTerapia' => $model->idTerapia], ['class' => 'btn btn-primary']) ?>
